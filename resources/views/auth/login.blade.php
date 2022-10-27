@@ -24,6 +24,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <script src="https://cdn.statically.io/gh/devanka761/notipin/v1.24.49/all.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
@@ -136,6 +137,7 @@
                     id="email"
                     name="email"
                     placeholder="Enter your email "
+                    value="{{ old('email') }}"
                     autofocus
                   />
                 </div>
@@ -203,5 +205,18 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      @foreach($errors->all() as $error)
+      Notipin.Alert({
+          msg: "{{ $error }}", 
+          yes: "OKE",
+          
+          type: "NORMAL",
+          mode: "DARK",
+          })
+          
+      @endforeach
+      
+  </script>
   </body>
 </html>

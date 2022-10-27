@@ -16,7 +16,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Dashboard | Camoet</title>
 
     <meta name="description" content="" />
 
@@ -26,6 +26,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.statically.io/gh/devanka761/notipin/v1.24.49/all.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
@@ -118,7 +119,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Camoet</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -141,35 +142,53 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Layouts</div>
+                <div data-i18n="Layouts">Menu</div>
               </a>
 
               <ul class="menu-sub">
+                @can('superadmin')
                 <li class="menu-item">
                   <a href="layouts-without-menu.html" class="menu-link">
-                    <div data-i18n="Without menu">Without menu</div>
+                    <div data-i18n="Without menu">Daftar Admin</div>
+                  </a>
+                </li>
+               
+                @elsecan('admin')
+                <li class="menu-item">
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">Jenis Motor</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-without-navbar.html" class="menu-link">
-                    <div data-i18n="Without navbar">Without navbar</div>
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">Data motor</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-container.html" class="menu-link">
-                    <div data-i18n="Container">Container</div>
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">Jumlah pemesanan</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-fluid.html" class="menu-link">
-                    <div data-i18n="Fluid">Fluid</div>
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">Laporan Harian</div>
+                  </a>
+                </li>
+                @else
+                <li class="menu-item">
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">Kembali ke menu</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Blank">Blank</div>
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">Keranjang</div>
                   </a>
                 </li>
+               
+                @endcan
+               
+                
               </ul>
             </li>
 
@@ -229,7 +248,17 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <small class="text-muted">
+
+                              @if (Auth::user()->level == 1)
+                              User
+                                
+                              @elseif (Auth::user()->level == 2)
+                              Admin
+                              @else
+                              Superadmin
+                              @endif
+                            </small>
                           </div>
                         </div>
                       </a>
@@ -241,23 +270,11 @@
                       <a class="dropdown-item" href="#">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
+                        
                       </a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li>
+                 
+                    
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -347,5 +364,19 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <script>
+      @foreach($errors->all() as $error)
+      Notipin.Alert({
+          msg: "{{ $error }}", 
+          yes: "OKE",
+          
+          type: "NORMAL",
+          mode: "DARK",
+          })
+          
+      @endforeach
+      
+  </script>
   </body>
 </html>
