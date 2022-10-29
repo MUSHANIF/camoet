@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Under Maintenance - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Under Maintenance </title>
 
     <meta name="description" content="" />
 
@@ -72,7 +72,7 @@
       <div class="misc-wrapper">
         <h2 class="mb-2 mx-2">Under Maintenance!</h2>
         <p class="mb-4 mx-2">Sorry for the inconvenience but we're performing some maintenance at the moment</p>
-        <a href="index.html" class="btn btn-primary">Back to home</a>
+        <a href="/" class="btn btn-primary">Back to home</a>
         <div class="mt-4">
           <img
             src="../assets/img/illustrations/girl-doing-yoga-light.png"

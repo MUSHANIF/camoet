@@ -1,22 +1,38 @@
 @extends('layouts.admin')
 @section('isi')
 
-  <div class="container" style="position: relative;">
-    
-    <form action="{{ route('jns.store') }}" method="post" enctype="multipart/form-data" >
+<div class="col-xxl">
+  <div class="card mb-4">
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <h5 class="mb-0">Jenis motor</h5>
+      {{-- <small class="text-muted float-end">Default label</small> --}}
+    </div>
+    <div class="card-body">
+      <form action="{{ route('jnsmotor.store') }}" method="POST">
         @csrf
       
-        <div class="form-group">
-            <label for="formGroupExampleInput">jenis</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" name="jenis" value="{{ old('jenis') }}">
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="basic-default-company">Jenis Motor</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              id="basic-default-company"
+              placeholder="Matic"
+              name="name"
+            />
+          </div>
         </div>
-        
-     
        
-         <button style="background-color: #FF9106; border: unset" type="submit" class="btn btn-primary mt-4">Tambah</button>
-         <button type="reset" class="btn btn-danger mt-4">Reset</button>
-    </form>
+        <div class="row justify-content-end">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
+</div>
 
 <!-- Optional JavaScript; choose one of the two! -->
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\jnsmotorController;
+use App\Http\Controllers\motorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +18,14 @@ use App\Http\Controllers\jnsmotorController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/maintenance', function () {
+    return view('maintenance');
+});
 Route::group(['middleware' => ['revalidate','auth']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/dashboardAdmin', [dashboardController::class, 'index'])->name('dashboardAdmin');
         Route::resource('jnsmotor', jnsmotorController::class);
+        Route::resource('motor', motorController::class);
     });
     Route::group(['middleware' => ['superadmin']], function () {
         Route::get('/dashboardsuperadmin', [dashboardController::class, 'index'])->name('dashboardsuperadmin');

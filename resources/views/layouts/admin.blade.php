@@ -148,7 +148,7 @@
               <ul class="menu-sub">
                 @can('superadmin')
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/maintenance" class="menu-link">
                     <div data-i18n="Without menu">Daftar Admin</div>
                   </a>
                 </li>
@@ -160,28 +160,28 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/motor" class="menu-link">
                     <div data-i18n="Without menu">Data motor</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/maintenance" class="menu-link">
                     <div data-i18n="Without menu">Jumlah pemesanan</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/maintenance" class="menu-link">
                     <div data-i18n="Without menu">Laporan Harian</div>
                   </a>
                 </li>
                 @else
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/maintenance" class="menu-link">
                     <div data-i18n="Without menu">Kembali ke menu</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/maintenance" class="menu-link">
                     <div data-i18n="Without menu">Keranjang</div>
                   </a>
                 </li>
@@ -291,10 +291,21 @@
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
+          
           <div class="content-wrapper">
+            
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="row">
+                <div class="d-sm-flex align-items-right justify-content-between mb-4">
+                  <div class="demo-inline-spacing">
+                    
+                    @yield('button')
+                    
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 
                @yield('isi')
@@ -368,5 +379,20 @@
       @endforeach
       
   </script>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+   <script type="text/javascript">
+      $(document).ready(function (e) {
+         $("#image").change(function () {
+            let reader = new FileReader();
+
+            reader.onload = (e) => {
+               $("#preview-image-before-upload").attr("src", e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
+         });
+      });
+   </script>
   </body>
 </html>

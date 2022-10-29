@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\jnsmotor;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Http\Requests\StorejnsmotorRequest;
 use App\Http\Requests\UpdatejnsmotorRequest;
@@ -24,12 +26,12 @@ class JnsmotorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function create()
     {
-        $datas =  DB::table('jnsvillas')->get();
-        return view('petugas.jnsvilla.create', compact('datas'));
+        $datas =  DB::table('jnsmotors')->get();
+        return view('admin.jnsmotor.create', compact('datas'));
     }
 
     /**
@@ -41,20 +43,20 @@ class JnsmotorController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $model = new jnsvilla;
+        $model = new jnsmotor;
       
-        $model->jenis = $request->jenis;
+        $model->name = $request->name;
         $validasi = Validator::make($data, [
-            'jenis' => 'required|max:191|unique:jnsvillas',
+            'name' => 'required|max:191|unique:jnsmotors',
         ]);
         if ($validasi->fails()) {
-            return redirect()->route('jnsvilla.create')->withInput()->withErrors($validasi);
+            return redirect()->route('jnsmotor.create')->withInput()->withErrors($validasi);
         }
        
         $model->save();
 
         toastr()->success('Berhasil di buat!', 'Sukses');
-        return redirect('/jns');
+        return redirect('/jnsmotor');
     }
 
     /**
@@ -100,10 +102,10 @@ class JnsmotorController extends Controller
      */
     public function destroy($id)
     {
-        $hapus = jnsvilla::find($id);
+        $hapus = jnsmotor::find($id);
         $hapus->delete();
         toastr()->info('Berhasil di hapus!', 'Sukses');
-        return redirect('jns');
+        return redirect('jnsmotor');
     }
 
 }

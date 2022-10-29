@@ -17,12 +17,7 @@
   </div>
 @endsection
 @section("button")
-<div class="col-6">
-    <div class="text-end upgrade-btn">
-        <a href="{{ route('jnsmotor.create') }}" class="btn btn-primary text-white"
-                >Tambah</a>
-    </div>
-</div>
+    <a href="{{ route('jnsmotor.create') }}" class="btn btn-primary text-end">Tambah</a>
 @endsection
 @section('title')
 <h1 class="mb-0 fw-bold">List jenis villa</h1> 
@@ -51,12 +46,16 @@
                   <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="javascript:void(0);"
+                  {{-- <a class="dropdown-item" href="{{ route('jnsmotor.edit',$key->id) }}"
                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                  >
-                  <a class="dropdown-item" href="javascript:void(0);"
-                    ><i class="bx bx-trash me-1"></i> Delete</a
-                  >
+                  > --}}
+                  <form action="{{ url('jnsmotor/'.$key->id) }}" method="POST" >
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i>Delete</button>
+                    
+                </form>
+                  
                 </div>
               </div>
             </td>

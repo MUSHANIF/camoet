@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class motor extends Model
 {
     use HasFactory;
+    public function motor()
+    {
+        return $this->belongsTo(jnsmotor::class, 'jnsid', 'id');
+    }
 }
