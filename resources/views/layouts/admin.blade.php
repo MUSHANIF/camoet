@@ -155,7 +155,7 @@
                
                 @elsecan('admin')
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="{{ route('jnsmotor.index') }}" class="menu-link">
                     <div data-i18n="Without menu">Jenis Motor</div>
                   </a>
                 </li>
@@ -213,17 +213,7 @@
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                  />
-                </div>
-              </div>
+              @yield('search')
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
