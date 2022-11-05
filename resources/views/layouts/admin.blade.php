@@ -224,7 +224,11 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      @if (Auth::user()->image  == NULL)
+                      <img src="/assets/img/avatars/1.png"  class="w-px-40 h-px-40 rounded-circle" />
+                      @else
+                      <img src="/assets/img/avatars/{{  Auth::user()->image  }}" alt class="w-px-40 h-px-40 rounded-circle" />
+                      @endif
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -233,7 +237,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              @if (Auth::user()->image  == NULL)
+                              <img src="/assets/img/avatars/1.png"  class="w-px-40 h-px-40 rounded-circle" />
+                              @else
+                              <img src="/assets/img/avatars/{{  Auth::user()->image  }}" alt class="w-px-40 h-px-40 rounded-circle" />
+                              @endif
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -257,14 +265,20 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="{{  route('profile.show', Auth::user()->id)}} ">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                         
                       </a>
                     </li>
                  
-                    
+                    <li>
+                      <a class="dropdown-item" href="{{  url('change/'.Auth::user()->id)}} ">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">Change Password</span>
+                        
+                      </a>
+                    </li>
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -394,5 +408,20 @@
          });
       });
    </script>
+   
+
+    <script type="text/javascript">
+       $(document).ready(function (e) {
+          $("#upload").change(function () {
+             let reader = new FileReader();
+
+             reader.onload = (e) => {
+                $("#preview-image-before-upload").attr("src", e.target.result);
+             };
+
+             reader.readAsDataURL(this.files[0]);
+          });
+       });
+    </script>
   </body>
 </html>

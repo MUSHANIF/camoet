@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/';
     public const SUPERADMIN = '/dashboardsuperadmin';
-    public const ADMIN = '/dashboardadmin';
+    public const ADMIN = '/dashboardAdmin';
 
 
     /**

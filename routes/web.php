@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\jnsmotorController;
 use App\Http\Controllers\motorController;
+use App\Http\Controllers\profileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,9 @@ Route::get('/', function () {
 Route::get('/maintenance', function () {
     return view('maintenance');
 });
+Route::resource('profile', profileController::class);
+Route::get('/change/{id}', [profileController::class, 'change']);
+Route::post('/update/{id}', [profileController::class, 'updatepw'])->name('updatepw');
 Route::group(['middleware' => ['revalidate','auth']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/dashboardAdmin', [dashboardController::class, 'index'])->name('dashboardAdmin');
