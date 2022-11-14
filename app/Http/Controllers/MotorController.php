@@ -32,7 +32,7 @@ class MotorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorejnsvillaRequest  $request
+     * @param  \App\Http\Requests\StoremotorRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,42 +78,79 @@ class MotorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\jnsvilla  $jnsvilla
+     * @param  \App\Models\motor  $motor
      * @return \Illuminate\Http\Response
      */
-    public function show(jnsvilla $jnsvilla)
+    public function show($id)
     {
-        //
+        $datas = motor::find($id);
+        return view("admin.motor.show",compact("datas"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\jnsvilla  $jnsvilla
+     * @param  \App\Models\motor  $motor
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $datas = jnsvilla::find($id);
-        return view('petugas.motor.ubah',compact('datas'));
+        $datas = motor::find($id);
+        $datas1 = jnsmotor::all();
+        return view('admin.motor.ubah',compact('datas','datas1'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatejnsvillaRequest  $request
-     * @param  \App\Models\jnsvilla  $jnsvilla
+     * @param  \App\Http\Requests\UpdatemotorRequest  $request
+     * @param  \App\Models\motor  $motor
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatejnsvillaRequest $request, jnsvilla $jnsvilla)
+    public function update(Request $request,  $id )
     {
-        //
+        $data = $request->all();
+        $model = motor::findOrFail($id);
+      
+    
+        $model->jnsid = $request->jnsid;
+        $model->name = $request->name;
+        $model->harga = $request->harga;
+        $model->status = $request->status;
+        $model->plat_nomor = $request->plat_nomor;
+        
+        $model->deskripsi = $request->deskripsi;
+       
+
+        $validasi = Validator::make($data, [
+            'name' => 'required|max:255',
+           
+            'harga' => 'required|max:15',
+            'status' => 'required|max:15',
+          
+            'plat_nomor' => 'required',
+            'deskripsi' => 'required|max:255',
+
+        ]);
+        if ($validasi->fails()) {
+            return redirect()->route('motor.edit', $id)->withInput()->withErrors($validasi);
+        }
+        if ($image = $request->file('image')) {
+            $destinationPath = 'assets/images/motor';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $model['image'] = "$profileImage";
+        }
+        $model->save();
+
+        toastr()->success('Berhasil di ubah!', 'Sukses');
+        return redirect('/motor');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\jnsvilla  $jnsvilla
+     * @param  \App\Models\motor  $motor
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

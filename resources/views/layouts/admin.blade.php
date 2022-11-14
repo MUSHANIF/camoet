@@ -33,26 +33,29 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
     <!-- Page CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+    <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+  
   </head>
 
   <body>
@@ -245,7 +248,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
+                            <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
                             <small class="text-muted">
 
                               @if (Auth::user()->level == 1)
@@ -360,22 +363,22 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
+    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -393,7 +396,7 @@
       @endforeach
       
   </script>
-   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   
 
    <script type="text/javascript">
       $(document).ready(function (e) {
@@ -409,7 +412,49 @@
       });
    </script>
    
+   
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+   {{-- <script>
+    
+    $(document).on('ajaxComplete ready', function () {
+        $('.a').off('click').on('click', function () {
+            $('#motorDetails').load($(this).attr('value'));
+           
+        });
+      });
+  </script> --}}
 
+
+
+   {{-- <script>
+   $(document).ready(function(){
+    $('td').addClass('class');
+     $("#offcanvasExample").modal({
+       keyboard: true,
+       backdrop: "static",
+       show: false,
+ 
+     }).on("show.bs.offcanvas", function(event){
+       var button = $(event.relatedTarget); // button the triggered modal
+       var personId = button.data("id"); //data-id of button which is equal to id (primary key) of person
+      
+       var name = $(event.relatedTarget).closest("tr").find("td:eq(1)").text(); 
+       var jenis = $(event.relatedTarget).closest("tr").find("td:eq(2)").text(); 
+       var harga = $(event.relatedTarget).closest("tr").find("td:eq(3)").text(); 
+       var plat = $(event.relatedTarget).closest("tr").find("td:eq(4)").text(); 
+       var status = $(event.relatedTarget).closest("tr").find("td:eq(5)").text(); 
+       var des = $(event.relatedTarget).closest("tr").find("td:eq(6)").text(); 
+       $('#offcanvasExample').click(function(){
+        $('#td').addClass('class');
+      })
+       //displays values to modal
+       $(this).find("#motorDetails").append($("<b>ID: " + personId + "<br>Nama Motor: " + name + "<br>Jenis Motor: " + jenis + "<br>Harga: " + harga + "<br>Plat Nomor: " + plat + "<br>Status: " + status + "<br>Deskripsi: " + des +  "</b>"))
+    
+     }).on("hide.bs.offcanvas", function (event) {
+     $(this).find("#motorDetails").html("");
+   });
+   });
+   </script> --}}
     <script type="text/javascript">
        $(document).ready(function (e) {
           $("#upload").change(function () {
@@ -423,5 +468,6 @@
           });
        });
     </script>
+  
   </body>
 </html>

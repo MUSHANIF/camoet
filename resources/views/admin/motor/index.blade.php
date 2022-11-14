@@ -45,13 +45,14 @@
         
         <tbody>
           <tr>
-            <td><img src="/assets/images/motor/{{ $key->image }}" style="height: 100px; width: 150px" /></td>
+            <td id="td"><img src="/assets/images/motor/{{ $key->image }}" style="height: 100px; width: 150px" /></td>
             <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $key->name }}</strong></td>
             <td>{{ $key->motor->name }}</td>
             <td>{{ $key->harga }}</td>
            
             <td>{{ $key->plat_nomor }}</td>
             <td>{{ $key->status }}</td>
+            <td class="d-none">{{ $key->deskripsi }}</td>
             
             <td>
               <div class="dropdown">
@@ -59,7 +60,15 @@
                   <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                  <a  id="detail" class="dropdown-item " data-id="{{ $key->id }}"  data-bs-toggle="offcanvas" href="#" data-bs-target="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+                    data-image="/assets/images/motor/{{ $key->image }}"
+                    data-name="{{ $key->name }}"
+                    data-jenis="{{ $key->motor->name  }}"
+                    data-harga="{{ $key->harga  }}"
+                    data-plat="{{ $key->plat_nomor  }}"
+                    data-status="{{ $key->status  }}"
+                    data-des="{{ $key->deskripsi  }}"
+                    >
                     <i class="bx bx-edit-alt me-1"></i>  Detail
                   </a>
                   <a class="dropdown-item" href="{{ route('motor.edit',$key->id) }}"
@@ -89,7 +98,7 @@
           </div>
           <div class="offcanvas-body">
             <div class="text-center mb-4">
-              <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="/assets/images/motor/{{ $key->image }}" style="height: 100px; width: 150px" /></a>
+              <a href="" data-bs-toggle="modal" id="motorDetails"  data-bs-target="#exampleModal1"><img src="" id="img" style="height: 100px; width: 150px" /></a>
             </div>
             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-xl">
@@ -99,32 +108,63 @@
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                       <img src="/assets/images/motor/{{ $key->image }}" style="height: 100%; width: 100%" />
+                       <img src="" id="img2" style="height: 100%; width: 100%" />
                     </div>
                  </div>
               </div>
            </div>
+           <div id="motorDetails" class="modal-body" style="margin-bottom: 12px">
             <div>
-             <b>Nama motor: </b>
-             <p>{{ $key->name }}</p>
-            </div>
-            <div>
-              <b>Jenis motor: </b>
-              <p>{{  $key->motor->name }}</p>
+              <b>Nama motor: </b>
+              <p><span id="name"></span></p>
              </div>
              <div>
-              <b>Plat motor: </b>
-              <p>{{ $key->plat_nomor }}</p>
-             </div>
-             <div>
-              <b>Deskripsi: </b>
-              <p>{{ $key->deskripsi }}</p>
-             </div>
+               <b>Jenis motor: </b>
+               <p><span id="jenis"></span></p>
+              </div>
+              <div>
+                <b>Harga: </b>
+                <p><span id="harga"></span></p>
+               </div>
+              <div>
+               <b>Plat motor: </b>
+               <p><span id="plat"></span></p>
+              </div>
+              <div>
+                <b>Status: </b>
+                <p><span id="status"></span></p>
+               </div>
+              <div>
+               <b>Deskripsi: </b>
+               <p><span id="des"></span></p>
+          </div>
           </div>
         </div>
         @endforeach
       </table>
     </div>
   </div>
-    
+    <script>
+        $(document).ready(function(){
+             $(document).on('click', '#detail', function () {
+              var img = $(this).data('image');
+           var name = $(this).data('name');
+           var jenis = $(this).data('jenis');
+           var harga = $(this).data('harga');
+           var plat = $(this).data('plat');
+           var status = $(this).data('status');
+           var des = $(this).data('des');
+           $('#img').attr('src',img);
+           $('#img2').attr('src',img);
+           $('#name').text(name);
+           $('#jenis').text(jenis);
+           $('#harga').text(harga);
+           $('#plat').text(plat);
+           $('#status').text(status);
+           $('#des').text(des);
+          
+           
+        });
+      });
+    </script>
 @endsection

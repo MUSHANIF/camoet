@@ -5,6 +5,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\jnsmotorController;
 use App\Http\Controllers\motorController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +17,7 @@ use App\Http\Controllers\profileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/maintenance', function () {
     return view('maintenance');
 });
