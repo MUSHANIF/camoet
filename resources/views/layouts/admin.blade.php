@@ -152,6 +152,11 @@
                 @can('superadmin')
                 <li class="menu-item">
                   <a href="/maintenance" class="menu-link">
+                    <div data-i18n="Without menu">Daftar User</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="{{ route('dataadmin.index') }}" class="menu-link">
                     <div data-i18n="Without menu">Daftar Admin</div>
                   </a>
                 </li>

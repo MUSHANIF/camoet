@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\transaksi;
+use App\Models\validation;
 use App\Http\Requests\StoretransaksiRequest;
 use App\Http\Requests\UpdatetransaksiRequest;
-
+use Illuminate\Http\Request;    
+use Auth;
 class TransaksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function keranjang(Request $request , $id)
+    {
+        $auth = Auth::user()->id ;
+        $datas = validation::where('userid',  auth()->user()->id)->first();
+        return view('keranjang',compact('datas'));
+       
+    }
+
     public function index()
     {
         //

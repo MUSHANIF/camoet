@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoremotorRequest;
 use App\Http\Requests\UpdatemotorRequest;
 use Illuminate\Http\Request;
+use Auth;
 class MotorController extends Controller
 {
     public function index(Request $request)

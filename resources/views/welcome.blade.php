@@ -88,7 +88,7 @@
 					            </div>      
 					          </div>
 					        </div>
-					        <p><a href="#" class="btn btn-primary py-3 px-4 text-center d-flex align-items-center justify-content-center ">Reserve Your Perfect Car</a></p>
+					        <p><a href="/listmotor" class="btn btn-primary py-3 px-4 text-center d-flex align-items-center justify-content-center ">Cari motor pilihan anda!</a></p>
 	  						</div>
 	  					</div>
 	  				</div>

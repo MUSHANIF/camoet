@@ -1,44 +1,53 @@
 @extends('layouts.admin')
 @section('isi')
-
-  <div class="container" style="position: relative;">
-    
-    <form action="{{ route('akunpetugas.store') }}" method="post" enctype="multipart/form-data" >
-        @csrf
-      
-        <div class="form-group">
-            <label for="formGroupExampleInput">Name</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="{{ old('name') }}">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">email</label>
-            <input type="email" class="form-control" id="formGroupExampleInput2" name="email" value="{{ old('email') }}">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput3">Password</label>
-            <input type="password" class="form-control" id="formGroupExampleInput3  " name="password" value="{{ old('password') }}">
-        </div>
-      
-            <input type="hidden" class="form-control" id="ProdID" name="level" value="2" required>
-       
-       
-         <button style="background-color: #FF9106; border: unset" type="submit" class="btn btn-primary mt-4">Tambah</button>
-         <button type="reset" class="btn btn-danger mt-4">Reset</button>
-    </form>
+<div class="col-xxl">
+    <div class="card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h5 class="mb-0">Data motor baru</h5>
+        {{-- <small class="text-muted float-end">Default label</small>    --}}
+      </div>
+      <div class="card-body">
+        <form action="{{ route('dataadmin.update') }}" method="POST"  enctype="multipart/form-data" >
+            @csrf
+           <input type="hidden" value="2" name="level">
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="basic-default-name" name="name" placeholder="Mumus" value="{{ old('name') }}" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="basic-default-name" name="email" placeholder="Mumus@gmail.com" value="{{ old('email') }}" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-company">Password</label>
+            <div class="col-sm-10">
+              <input
+                type="password"
+                class="form-control"
+                id="basic-default-company"
+                
+                name="password"
+                value="{{ old('password') }}"
+              />
+            </div>
+          </div>
+     
+        
+        
+          <div class="row justify-content-end">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-
-
-
-
-
-
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 @endsection

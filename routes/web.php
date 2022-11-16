@@ -6,6 +6,8 @@ use App\Http\Controllers\jnsmotorController;
 use App\Http\Controllers\motorController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\TransaksiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +23,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/'
 Route::get('/maintenance', function () {
     return view('maintenance');
 });
+Route::get('/listmotor', [dashboardController::class, 'list'])->name('listmotor');
 Route::resource('profile', profileController::class);
 Route::get('/change/{id}', [profileController::class, 'change']);
 Route::post('/update/{id}', [profileController::class, 'updatepw'])->name('updatepw');
@@ -32,9 +35,11 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
     });
     Route::group(['middleware' => ['superadmin']], function () {
         Route::get('/dashboardsuperadmin', [dashboardController::class, 'index'])->name('dashboardsuperadmin');
+        Route::resource('dataadmin', adminController::class);
     });
     Route::group(['middleware' => ['user']], function () {
         Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
+        Route::get('/keranjang/{id}', [App\Http\Controllers\TransaksiController::class, 'keranjang'])->name('keranjang');
     });
 });
 require __DIR__.'/auth.php';
