@@ -40,6 +40,7 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
     Route::group(['middleware' => ['user']], function () {
         Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
         Route::get('/keranjang/{id}', [App\Http\Controllers\TransaksiController::class, 'keranjang'])->name('keranjang');
+        Route::post('/validation', [App\Http\Controllers\validationController::class, 'index'])->name('validation');
     });
 });
 require __DIR__.'/auth.php';

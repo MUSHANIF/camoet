@@ -168,7 +168,7 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Detail motor {{  $key->name }}</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Detail motor <span id="name2"></span></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -306,6 +306,7 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
          $('#img').attr('src',img);
          $('#img2').attr('src',img);
          $('#name').text(name);
+         $('#name2').text(name);
          $('#jenis').text(jenis);
          $('#harga').text(harga);
          $('#plat').text(plat);
