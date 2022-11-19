@@ -134,12 +134,30 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
-              <a href="index.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-              </a>
-            </li>
+          @can('superadmin')
+          <li class="menu-item active">
+            <a href="/dashboardsuperadmin" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Analytics">Dashboard</div>
+            </a>
+          </li>
+          @elsecan('admin')
+          <li class="menu-item active">
+            <a href="/dashboardAdmin" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Analytics">Dashboard</div>
+            </a>
+          </li>
+          @else  
+          <li class="menu-item active">
+            <a href="/dashboard" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Analytics">Dashboard</div>
+            </a>
+          </li>
+          
+            
+          @endcan
 
             <!-- Layouts -->
             <li class="menu-item">
@@ -189,7 +207,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/maintenance" class="menu-link">
+                  <a href="{{ route('keranjang',Auth::id()) }}" class="menu-link">
                     <div data-i18n="Without menu">Keranjang</div>
                   </a>
                 </li>

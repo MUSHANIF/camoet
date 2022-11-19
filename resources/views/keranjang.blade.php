@@ -1,4 +1,7 @@
 @extends("layouts.admin")
+@section("button")
+<a href="" class="btn btn-primary text-end">Bayar semua yang ada di dalam keranjang anda</a>
+@endsection
 @section('isi')
 @if (empty($datas))
 <div class="col-xxl">
@@ -55,6 +58,53 @@
   </div>
 
     @else
-    <h1>udah ada datanya</h1>
+    <div class="card">
+      <h5 class="card-header">Isi keranjang anda</h5>
+      <div class="table-responsive text-nowrap">
+        <table class="table table-borderless text-center">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Nama motor</th>
+              <th>Durasi</th>
+              <th>harga</th>
+               <th>Action</th>
+            
+            </tr>
+          </thead>
+          @foreach ($motor as $key )
+          <tbody>
+            <tr>
+              <td id="td"><img src="/assets/images/motor/{{ $key->mtr->image }}" style="height: 100px; width: 150px" /></td>
+              <td> <strong>{{ $key->mtr->name }}</strong></td>
+              <td >{{ $key->durasi }} Minggu</td>
+              <td >{{ $key->mtr->harga }} /Minggu</td>
+              <td>
+                
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                      
+                          
+                        <form action="{{ url('hapus/'.$key->id) }}" method="POST" >
+                          @csrf
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i>Delete</button>
+                          
+                      </form>
+                    
+                  </div>
+                </div>
+              </td>
+            
+  
+            </tr>
+          </tbody>
+          @endforeach
+        </table>
+      </div>
+    </div>
     @endif
 @endsection

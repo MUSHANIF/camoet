@@ -14,7 +14,7 @@
                   Selamat Datang,{{ Auth::user()->name }}
                 </a>
                 <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                  <li><a class="dropdown-item" href="/dashboardsuperadmin">Dashboard</a></li>
                   <li><a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -33,7 +33,7 @@
                   Selamat Datang,{{ Auth::user()->name }}
                 </a>
                 <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                  <li><a class="dropdown-item" href="/dashboardAdmin">Dashboard</a></li>
                   <li><a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -52,7 +52,7 @@
                   Selamat Datang,{{ Auth::user()->name }}
                 </a>
                 <ul class="dropdown-menu "  aria-labelledby="navbarDropdownMenuLink">
-                  {{-- <li><a class="dropdown-item" href="">Dashboard</a></li> --}}
+                  <li><a class="dropdown-item" href="{{ route('dashboard')}}">Kerajang anda</a></li>
                   <li><a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">

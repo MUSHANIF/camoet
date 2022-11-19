@@ -12,4 +12,9 @@ class motor extends Model
     {
         return $this->belongsTo(jnsmotor::class, 'jnsid', 'id');
     }
+    public function cartmotor()
+    {
+        return $this->hasMany(cart::class, 'mtrid', 'id');
+    }
+
 }

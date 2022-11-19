@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\transaksi;
 use App\Models\validation;
+use App\Models\cart;
+use Redirect;
+use Carbon\Carbon;
 use App\Http\Requests\StoretransaksiRequest;
 use App\Http\Requests\UpdatetransaksiRequest;
 use Illuminate\Http\Request;    
@@ -12,12 +15,43 @@ class TransaksiController extends Controller
 {
     public function keranjang(Request $request , $id)
     {
-        $auth = Auth::user()->id ;
+       
+
         $datas = validation::where('userid',  auth()->user()->id)->first();
-        return view('keranjang',compact('datas'));
+        $motor =  cart::with(['user','mtr'])->where('userid', $id)->whereRelation('mtr', 'status' ,'Ada di gudang')->get();
+        return view('keranjang',compact('datas','motor'));
        
     }
+    public function tambah(Request $request , $id)
+    {
+        $data = cart::where('userid',$id)->where('mtrid',$request->mtrid )->first();
+        if( $data){
+            toastr()->error('sudah ada dikeranjang anda!', 'gagal');
+            return Redirect::back();
+        }else{
+            $model = new cart;
+            $model->userid = $request->userid;
+            $model->jnsid = $request->jnsid;
+            $model->mtrid = $request->mtrid;
+            $model->durasi = $request->durasi;
+            
+            $model->save(); 
+        }
+        
 
+        $datas = validation::where('userid',  auth()->user()->id)->first();
+        $motor =  cart::with(['user','mtr'])->where('userid', $id)->get();
+        toastr()->success('Berhasil di tambah ke keranjang anda!', 'Sukses');
+        return redirect()->route('keranjang', Auth::id());
+       
+    }
+    public function hapus($id)
+    {
+        $hapus = cart::find($id);
+        $hapus->delete();
+        toastr()->info('Berhasil di hapus!', 'Sukses');
+        return redirect()->route('keranjang', Auth::id());
+    }
     public function index()
     {
         //
@@ -84,8 +118,11 @@ class TransaksiController extends Controller
      * @param  \App\Models\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transaksi $transaksi)
+    public function destroy($id)
     {
-        //
+        $hapus = cart::find($id);
+        $hapus->delete();
+        toastr()->info('Berhasil di hapus!', 'Sukses');
+        return redirect()->route('keranjang', Auth::id());
     }
 }

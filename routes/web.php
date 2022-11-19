@@ -40,6 +40,8 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
     Route::group(['middleware' => ['user']], function () {
         Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
         Route::get('/keranjang/{id}', [App\Http\Controllers\TransaksiController::class, 'keranjang'])->name('keranjang');
+        Route::delete('/hapus/{id}', [App\Http\Controllers\TransaksiController::class, 'hapus'])->name('hapus');
+        Route::post('/tambah/{id}', [App\Http\Controllers\TransaksiController::class, 'tambah'])->name('tambah');
         Route::post('/validation', [App\Http\Controllers\validationController::class, 'index'])->name('validation');
     });
 });

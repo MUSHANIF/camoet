@@ -146,16 +146,31 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
                                 <span class="cat">{{ $key->deskripsi }}</span>
                             
                             </div>
-    						<p class="d-flex mb-0 d-block"><a href="{{ url('keranjang/'.$key->id) }}" class="btn btn-primary py-2 mr-1">Book now</a>
-                  <a id="detail" class="btn btn-secondary py-2 ml-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                  data-image="/assets/images/motor/{{ $key->image }}"
-                    data-name="{{ $key->name }}"
-                    data-jenis="{{ $key->motor->name  }}"
-                    data-harga="{{ $key->harga  }}"
-                    data-plat="{{ $key->plat_nomor  }}"
-                    data-status="{{ $key->status  }}"
-                    data-des="{{ $key->deskripsi  }}"
-                  >Details</a></p>
+                            <p class="d-flex mb-0 d-block">
+                              <a id="pesan" class="btn btn-primary py-2 ml-1  " data-bs-toggle="modal" data-bs-target="#exampleModal"
+                              data-userid="{{ Auth::id() }}"
+                              data-jnsid="{{ $key->motor->id }}"
+                              data-mtrid="{{ $key->id }}"
+                              >
+                                Pesan 
+                             </a>
+                        
+                              <a id="detail" class="btn btn-secondary py-2 ml-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                                    data-image="/assets/images/motor/{{ $key->image }}"
+                                      data-name="{{ $key->name }}"
+                                      data-jenis="{{ $key->motor->name  }}"
+                                      data-harga="{{ $key->harga  }}"
+                                      data-plat="{{ $key->plat_nomor  }}"
+                                      data-warna="{{ $key->warna  }}"
+                                      data-status="{{ $key->status  }}"
+                                      data-des="{{ $key->deskripsi  }}"
+                                    >Details</a>
+                                  
+                              
+                            
+                            </p>
+             
+                
     					</div>
     				</div>
                  
@@ -165,7 +180,45 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
     	
     		</div>
 
-
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Pesan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="{{ route('tambah',Auth::id()) }}" method="POST" >
+                  @csrf
+                  <input type="hidden" id="userid" name="userid" value="">
+                  <input type="hidden" id="jnsid" name="jnsid" value="">
+                  <input type="hidden" id="mtrid" name="mtrid" value="">
+                  <div class="row">
+                    <div class="col-md-12 mt-2">
+                      <label for="exampleFormControlInput1" class="form-label">Durasi</label>
+                      <select class="form-select" id="exampleFormControlSelect1" name="durasi" aria-label="Default select example">
+                        
+                           <option id="1" value="1">1 Minggu</option>
+                           <option id="2" value="2">2 Minggu</option>
+                        
+   
+                          
+                         </select>
+                    </div>
+                  </div>
+                  
+                  
+                
+              </div>
+         
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Pesan</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Detail motor <span id="name2"></span></h5>
@@ -205,7 +258,10 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
          <b>Plat motor: </b>
          <p><span id="plat"></span></p>
         </div>
-       
+        <div>
+          <b>Warna: </b>
+          <p><span id="warna"></span></p>
+         </div>
          <b>Deskripsi: </b>
          <p><span id="des"></span></p>
     </div>
@@ -303,6 +359,7 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
          var plat = $(this).data('plat');
          var status = $(this).data('status');
          var des = $(this).data('des');
+         var warna = $(this).data('warna');
          $('#img').attr('src',img);
          $('#img2').attr('src',img);
          $('#name').text(name);
@@ -310,12 +367,28 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
          $('#jenis').text(jenis);
          $('#harga').text(harga);
          $('#plat').text(plat);
+         $('#warna').text(warna);
          $('#status').text(status);
          $('#des').text(des);
         
          
       });
     });
+    $(document).ready(function(){
+         $(document).on('click', '#pesan', function () {
+          var userid = $(this).data('userid');
+       var jnsid = $(this).data('jnsid');
+       var mtrid = $(this).data('mtrid');
+       
+ 
+       $('#userid').attr('value',userid);
+       $('#jnsid').attr('value',jnsid);
+       $('#mtrid').attr('value',mtrid);
+     
+      
+       
+    });
+  });
   </script>
   <!-- loader -->
   {{-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --}}

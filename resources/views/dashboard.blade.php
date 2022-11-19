@@ -292,7 +292,7 @@
             </div>
           </div>
           <span class="fw-semibold d-block mb-1">Jumlah Keranjang anda</span>
-          <h3 class="card-title mb-2">12</h3>
+          <h3 class="card-title mb-2">{{ $keranjang }}</h3>
           
         </div>
       </div>

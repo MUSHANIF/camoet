@@ -47,6 +47,7 @@ class MotorController extends Controller
         $model->status = $request->status;
         $model->plat_nomor = $request->plat_nomor;
         $model->image = $request->image;
+        $model->warna = $request->warna;
         $model->deskripsi = $request->deskripsi;
         if ($image = $request->file('image')) {
             $destinationPath = 'assets/images/motor';
@@ -63,6 +64,7 @@ class MotorController extends Controller
             'status' => 'required|max:15',
           
             'plat_nomor' => 'required',
+            'warna' => 'required',
             'deskripsi' => 'required|max:255',
 
         ]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\cart;
 use App\Models\motor;
 use App\Models\jnsmotor;
 
@@ -17,6 +18,7 @@ class dashboardController extends Controller
             'motor' => motor::where('status', '=', 'Ada di gudang')->count(),
             'motorpake' => motor::where('status', '=', 'Sedang di pakai')->count(),
             'jenis' => jnsmotor::where('name', '=', 'matic')->count(),
+            'keranjang' => cart::where('userid', '=', auth()->user()->id)->count(),
            
         ]);
     }

@@ -20,7 +20,7 @@
 <a href="{{ route('motor.create') }}" class="btn btn-primary text-end">Tambah</a>
 @endsection
 @section('title')
-<h1 class="mb-0 fw-bold">List villa</h1> 
+<h1 class="mb-0 fw-bold">List motor</h1> 
 @endsection
 @section('isi')
 <div class="card">
@@ -66,6 +66,7 @@
                     data-jenis="{{ $key->motor->name  }}"
                     data-harga="{{ $key->harga  }}"
                     data-plat="{{ $key->plat_nomor  }}"
+                    data-warna="{{ $key->warna  }}"
                     data-status="{{ $key->status  }}"
                     data-des="{{ $key->deskripsi  }}"
                     >
@@ -131,6 +132,11 @@
                <p><span id="plat"></span></p>
               </div>
               <div>
+                <div>
+                  <b>Warna: </b>
+                  <p><span id="warna"></span></p>
+                 </div>
+                 <div>
                 <b>Status: </b>
                 <p><span id="status"></span></p>
                </div>
@@ -154,6 +160,7 @@
            var plat = $(this).data('plat');
            var status = $(this).data('status');
            var des = $(this).data('des');
+           var warna = $(this).data('warna');
            $('#img').attr('src',img);
            $('#img2').attr('src',img);
            $('#name').text(name);
@@ -162,6 +169,7 @@
            $('#plat').text(plat);
            $('#status').text(status);
            $('#des').text(des);
+           $('#warna').text(warna);
           
            
         });
