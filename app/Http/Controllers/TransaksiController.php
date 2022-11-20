@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\transaksi;
 use App\Models\validation;
 use App\Models\cart;
+use App\Models\motor;
 use Redirect;
 use Carbon\Carbon;
 use App\Http\Requests\StoretransaksiRequest;
@@ -51,6 +52,18 @@ class TransaksiController extends Controller
         $hapus->delete();
         toastr()->info('Berhasil di hapus!', 'Sukses');
         return redirect()->route('keranjang', Auth::id());
+    }
+    public function pembayaran($id)
+    {
+        $motor =  cart::with(['user','mtr'])->where('userid', $id)->get();
+        $jmlh =  cart::with(['user','mtr'])->where('userid', $id)->count();
+        $total =  motor::with([
+            'mtr'])
+        ->join('carts', 'carts.mtrid', '=', 'motors.id')
+        ->where('carts.userid',Auth::id()) 
+        ->sum('harga')   
+        ;
+       return view('pembayaran',compact('motor','jmlh','total'));
     }
     public function index()
     {

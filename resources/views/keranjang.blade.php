@@ -1,6 +1,6 @@
 @extends("layouts.admin")
-@section("button")
-<a href="" class="btn btn-primary text-end">Bayar semua yang ada di dalam keranjang anda</a>
+@section("button")  
+<a href="{{ route('pembayaran',Auth::id()) }}" class="btn btn-primary text-end">Bayar semua yang ada di dalam keranjang anda</a>
 @endsection
 @section('isi')
 @if (empty($datas))

@@ -43,6 +43,7 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
         Route::get('/keranjang/{id}', [App\Http\Controllers\TransaksiController::class, 'keranjang'])->name('keranjang');
         Route::delete('/hapus/{id}', [App\Http\Controllers\TransaksiController::class, 'hapus'])->name('hapus');
         Route::post('/tambah/{id}', [App\Http\Controllers\TransaksiController::class, 'tambah'])->name('tambah');
+        Route::get('/pembayaran/{id}', [App\Http\Controllers\TransaksiController::class, 'pembayaran'])->name('pembayaran');
         Route::post('/validation', [App\Http\Controllers\validationController::class, 'index'])->name('validation');
     });
 });
