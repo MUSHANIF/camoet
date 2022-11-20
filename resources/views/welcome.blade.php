@@ -155,7 +155,10 @@
 		    				</div>
     					</div>
               @endforeach
-    				</div>
+         
+              
+             
+          
     			</div>
     		</div>
     	</div>
@@ -163,37 +166,50 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
+              @if ($user)
               <h1 class="modal-title fs-5" id="exampleModalLabel">Pesan</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="{{ route('tambah',Auth::id()) }}" method="POST" >
-                @csrf
-                <input type="hidden" id="userid" name="userid" value="">
-                <input type="hidden" id="jnsid" name="jnsid" value="">
-                <input type="hidden" id="mtrid" name="mtrid" value="">
-                <div class="row">
-                  <div class="col-md-12 mt-2">
-                    <label for="exampleFormControlInput1" class="form-label">Durasi</label>
-                    <select class="form-select" id="exampleFormControlSelect1" name="durasi" aria-label="Default select example">
+          
+             <form action="{{ route('tambah',$user) }}" method="POST" >
+              @csrf
+              <input type="hidden" id="userid" name="userid" value="">
+              <input type="hidden" id="jnsid" name="jnsid" value="">
+              <input type="hidden" id="mtrid" name="mtrid" value="">
+              <div class="row">
+                <div class="col-md-12 mt-2">
+                  <label for="exampleFormControlInput1" class="form-label">Durasi</label>
+                  <select class="form-select" id="exampleFormControlSelect1" name="durasi" aria-label="Default select example">
+                    
+                       <option id="1" value="1">1 Minggu</option>
+                       <option id="2" value="2">2 Minggu</option>
+                    
+
                       
-                         <option id="1" value="1">1 Minggu</option>
-                         <option id="2" value="2">2 Minggu</option>
-                      
- 
-                        
-                       </select>
-                  </div>
+                     </select>
                 </div>
-                
-                
+              </div>
               
+              
+            
+          </div>
+     
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Pesan</button>
+          </form>
+          @else
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Pesan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-       
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Pesan</button>
-            </form>
+            <div class="modal-body">
+          
+            <h2>Silahkan login atau register terlebih dahulu!</h2>
+          
+
+               
+             @endif
             </div>
           </div>
         </div>
@@ -405,56 +421,33 @@
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 heading-section text-center ftco-animate">
-          	<span class="subheading">Blog</span>
-            <h2>Recent Blog</h2>
+          	<span class="subheading">Berita</span>
+            <h2>Berita Terkini</h2>
           </div>
         </div>
+  
+          
+       
         <div class="row d-flex">
+          @foreach ($api['articles'] as $u )
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+              <a href="blog-single.html" class="block-20" >
+                <img src="{{ $u['urlToImage'] }}" width="100%" height="100%" alt="">
               </a>
               <div class="text pt-4">
               	<div class="meta mb-3">
-                  <div><a href="#">Oct. 29, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  <div><a href="#">{{ $u['author'] }}</a></div>
+                  {{-- <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> --}}
                 </div>
-                <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
+                <h3 class="heading mt-2"><a href="#">{{ $u['title'] }}</a></h3>
+                <p><a href="{{ $u['url'] }}" class="btn btn-primary">Read more</a></p>
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-              </a>
-              <div class="text pt-4">
-              	<div class="meta mb-3">
-                  <div><a href="#">Oct. 29, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-              </a>
-              <div class="text pt-4">
-              	<div class="meta mb-3">
-                  <div><a href="#">Oct. 29, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
-              </div>
-            </div>
-          </div>
+          @endforeach
+        
         </div>
       </div>
     </section>	

@@ -23,6 +23,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/'
 Route::get('/maintenance', function () {
     return view('maintenance');
 });
+
 Route::get('/listmotor', [dashboardController::class, 'list'])->name('listmotor');
 Route::resource('profile', profileController::class);
 Route::get('/change/{id}', [profileController::class, 'change']);

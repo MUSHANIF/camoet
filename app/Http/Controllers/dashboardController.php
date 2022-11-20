@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\cart;
 use App\Models\motor;
 use App\Models\jnsmotor;
+use Illuminate\Support\Facades\Http;
 
 class dashboardController extends Controller
 {
@@ -27,4 +28,5 @@ class dashboardController extends Controller
         $datas =  motor::with(['motor'])->where('name','like',"%".$cari."%")->get();
         return view('motor',compact('datas'));
     }
+
 }
