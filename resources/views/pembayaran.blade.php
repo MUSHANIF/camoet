@@ -32,19 +32,25 @@
                 
               {{ $total }}
         </div>
-        <form action="{{ route('validation') }}" method="POST"  enctype="multipart/form-data" >
+        <form action="{{ route('bayar',Auth::id()) }}" method="POST"  enctype="multipart/form-data" >
             @csrf
-           <input type="hidden" name="userid" value="{{ Auth::user()->id }}">
+        
+           @foreach ($motor2 as $m )
+               
+           <input type="hidden" name="userid" value="{{ $m->userid }}">
+           <input type="hidden"  name="mtrid" value="{{ $m->mtrid }}"/>
+           <input type="hidden"  name="durasi" value="{{ $m->durasi }}"/>
+           @endforeach
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-name">Masukan jumlah uang</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" id="basic-default-name" name="total" value="{{ Auth::user()->name  }}" />
+              <input type="number" class="form-control" id="basic-default-name" name="total" placeholder="100.000"/>
             </div>
           </div>
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-name">Metode pembayaran yang tersedia:</label>
             <div class="col-sm-10">
-                <select class="form-select" id="exampleFormControlSelect1" name="jns" aria-label="Default select example">
+                <select class="form-select" id="exampleFormControlSelect1" name="metode_pembayaran" aria-label="Default select example">
                     
                        <option value="cash">Cash</option>
                     

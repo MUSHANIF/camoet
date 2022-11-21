@@ -19,7 +19,7 @@ class dashboardController extends Controller
             'motor' => motor::where('status', '=', 'Ada di gudang')->count(),
             'motorpake' => motor::where('status', '=', 'Sedang di pakai')->count(),
             'jenis' => jnsmotor::where('name', '=', 'matic')->count(),
-            'keranjang' => cart::where('userid', '=', auth()->user()->id)->count(),
+            'keranjang' => cart::where('userid', '=', auth()->user()->id)->where('status',0)->count(),
            
         ]);
     }
