@@ -1,6 +1,12 @@
 @extends("layouts.admin")
 @section("button")  
+@empty($cek)
+@else
 <a href="{{ route('pembayaran',Auth::id()) }}" class="btn btn-primary text-end">Bayar semua yang ada di dalam keranjang anda</a>
+
+
+@endif
+
 @endsection
 @section('isi')
 @if (empty($datas))
@@ -58,6 +64,12 @@
   </div>
 
     @else
+    @empty($cek2)
+    <div class="card">
+      <h5 class="card-header text-center">Keranjang anda kosong!</h5>
+    </div>
+    @else
+  
     <div class="card">
       <h5 class="card-header">Isi keranjang anda</h5>
       <div class="table-responsive text-nowrap">
@@ -106,5 +118,6 @@
         </table>
       </div>
     </div>
+    @endempty
     @endif
 @endsection

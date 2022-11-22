@@ -211,7 +211,11 @@
                     <div data-i18n="Without menu">Keranjang</div>
                   </a>
                 </li>
-               
+                <li class="menu-item">
+                  <a href="{{ route('motoruser',Auth::id()) }}" class="menu-link">
+                    <div data-i18n="Without menu">Motor yang anda sewa</div>
+                  </a>
+                </li>
                 @endcan
                
                 
