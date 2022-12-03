@@ -16,4 +16,12 @@ class cart extends Model
     {
         return $this->belongsTo(motor::class, 'mtrid', 'id');
     }
+    public function orang()
+    {
+        return $this->belongsTo(validation::class, 'userid', 'userid');
+    }
+    public function trans()
+    {
+        return $this->hasMany(transaksi::class, 'userid', 'userid');
+    }
 }

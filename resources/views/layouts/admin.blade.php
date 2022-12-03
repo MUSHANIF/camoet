@@ -59,6 +59,8 @@
   </head>
 
   <body>
+    @include('sweetalert::alert')
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -191,12 +193,12 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/maintenance" class="menu-link">
+                  <a href="{{ route('jumlahpemesanan') }}" class="menu-link">
                     <div data-i18n="Without menu">Jumlah pemesanan</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/maintenance" class="menu-link">
+                  <a href="/laporan" class="menu-link">
                     <div data-i18n="Without menu">Laporan Harian</div>
                   </a>
                 </li>
@@ -348,7 +350,9 @@
                     @yield('button')
                     
                   </div>
+                  @yield('button2')
                 </div>
+              
               </div>
               <div class="row">
                 

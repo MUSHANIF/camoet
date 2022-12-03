@@ -22,7 +22,15 @@
             <td id="td"><img src="/assets/images/motor/{{ $key->image }}" style="height: 100px; width: 150px" /></td>
             <td> <strong>{{ $key->name }}</strong></td>
             <td >{{ $key->durasi }} Minggu</td>
-            <td >{{ $key->waktu }}</td>
+            <td >{{ $key->waktu }} 
+              @if ($data)
+              ({{ $waktu }})
+              @elseif($data2)
+              .
+              @endif  
+              
+            
+            </td>
             @if ($key->status == 1)
             <td><span class="badge bg-label-primary me-1">Sedang aktif di pakai</span></td>
             @elseif($key->status == 2)

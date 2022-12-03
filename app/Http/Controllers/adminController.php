@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
+use App\Exports\LaporanExport;
+use App\Models\cart;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use PDF;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
@@ -140,5 +143,53 @@ class adminController extends Controller
         $hapus->delete();
         toastr()->info('Berhasil di hapus!', 'Sukses');
         return redirect('admin');
+    }
+    public function laporan(Request $request){
+        $tgl = $request->tgl;
+        
+
+        if ($request->tgl) {
+            $datas =  cart::with([
+                'orang','mtr','user'])        
+            ->where('status', 2)
+            ->where('waktu_kembali', $tgl)
+            ->get();
+        } else {
+            $datas =  cart::with([
+                'orang','mtr','user'])        
+            ->where('status', 2)
+            ->where('waktu_kembali', date('Y-m-d'))
+            ->get();
+        }
+        // $datas = cart::with([
+        //     'orang','mtr','user'])        
+        // ->where('status', 2)
+        // ->get();
+      
+        return view('admin.laporan.index' , compact('datas','tgl'));
+    }
+    public function laporanbelum(){
+        $datas = cart::with([
+            'orang','mtr','user'])        
+        ->where('status', 1)
+        ->get();
+      
+        return view('admin.laporan.indexbelum' , compact('datas'));
+    }
+    public function pdf(){
+        $tanggal = date("Y-m-d");
+        $datas = cart::with([
+            'orang','mtr','user'])        
+        ->where('status', 2)
+        ->where('waktu_kembali', date('Y-m-d'))
+        ->get();
+        // return view('admin.laporan.pdf', compact('datas','tanggal'));
+            $pdf = PDF::loadview('admin.laporan.pdf', compact('datas','tanggal'));
+            return $pdf->download('laporanpdf.pdf');
+    }
+      public function excel(){
+      
+        return Excel::download(new LaporanExport, 'laporantransaksi.xlsx');
+      
     }
 }

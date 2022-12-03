@@ -33,6 +33,11 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
         Route::get('/dashboardAdmin', [dashboardController::class, 'index'])->name('dashboardAdmin');
         Route::resource('jnsmotor', jnsmotorController::class);
         Route::resource('motor', motorController::class);
+        Route::get('/jumlahpemesanan', [App\Http\Controllers\motorController::class, 'jumlah'])->name('jumlahpemesanan');
+        Route::get('/laporan', [App\Http\Controllers\adminController::class, 'laporan'])->name('laporan');
+        Route::get('/laporanpdf', [App\Http\Controllers\adminController::class, 'pdf'])->name('laporanpdf');
+        Route::get('/laporanexcel', [App\Http\Controllers\adminController::class, 'excel'])->name('laporanexcel');
+        Route::get('/laporanbelum', [App\Http\Controllers\adminController::class, 'laporanbelum'])->name('laporanbelum');
     });
     Route::group(['middleware' => ['superadmin']], function () {
         Route::get('/dashboardsuperadmin', [dashboardController::class, 'index'])->name('dashboardsuperadmin');

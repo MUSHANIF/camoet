@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\motor;
+use App\Models\cart;
 use App\Models\jnsmotor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -10,8 +11,14 @@ use App\Http\Requests\StoremotorRequest;
 use App\Http\Requests\UpdatemotorRequest;
 use Illuminate\Http\Request;
 use Auth;
+use Alert;
+use Carbon\Carbon;
 class MotorController extends Controller
 {
+    //Status = 1 adalah sudah melakukan pembayaran
+    //status = 2 adalah motor sudah di kembalikan
+    //status = 3  adalah motor yang terlambat di kembalikan
+
     public function index(Request $request)
     {
         $cari = $request->cari;
@@ -163,4 +170,27 @@ class MotorController extends Controller
         toastr()->info('Berhasil di hapus!', 'Sukses');
         return redirect('motor');
     }
+    public function jumlah(){
+        $waktu =  Carbon::now();
+        $tanggal = date("Y-m-d");
+        $datas = cart::with([
+            'orang','mtr','user'])
+        
+        
+        ->Orwhere('carts.status', 1)
+        // ->Orwhere('carts.status', 2)
+        ->get();
+        $expire =   DB::table('carts')->where('waktu', '<'  , $tanggal)
+        ->where('status', 1)
+        
+          
+        ->first();
+        if($expire){
+            
+            Alert::info('Info','Ada motor yang lewat batas waktu!')->showConfirmButton('Konfirmasi', '#3085d6');
+
+        }
+        return view('admin.jumlah',compact('datas','waktu','expire'));
+    }
 }
+

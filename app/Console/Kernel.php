@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             DB::table('carts')->where('waktu', '=<', Carbon::now())->update(['status' => 3]);
-        })->everyMinute();
+        })->daily();
     }
 
     /**

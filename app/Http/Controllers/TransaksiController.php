@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 use Auth;
 class TransaksiController extends Controller
 {
+     //Status = 1 adalah sudah melakukan pembayaran
+    //status = 2 adalah motor sudah di kembalikan
+    //status = 3  adalah motor yang terlambat di kembalikan
     public function keranjang(Request $request , $id)
     {
        
@@ -152,7 +155,19 @@ class TransaksiController extends Controller
         ->Orwhere('carts.status',1 )
         ->Orwhere('carts.status',2 )
         ->get();
-        return view('motorid',compact('datas'));
+        $data = cart::where('durasi',1)->first();
+        $data2 = cart::where('durasi',2)->first();
+        if($data2){
+            $p =  Carbon::parse($data->waktu); 
+            $waktu =   $p->diffForHumans(Carbon::now());
+        }elseif($data2){
+
+        
+        $p =  Carbon::parse($data2->waktu); 
+        $waktu2 =   $p->diffForHumans(Carbon::now());
+        }
+      
+        return view('motorid',compact('datas','waktu','data','data2'));
     }
     public function balikin(Request $request,$id){
     // $datas =  cart::where('id',$id)->where('userid', Auth::id())->update(['status' => $request->status]);
@@ -161,7 +176,7 @@ class TransaksiController extends Controller
     ->join('carts', 'carts.mtrid', '=', 'motors.id')
     ->where('carts.userid',Auth::id()) 
     ->where('carts.id',$id)
-    ->update(['motors.status' => 'Ada di gudang','carts.status' => $request->status])
+    ->update(['motors.status' => 'Ada di gudang','carts.status' => $request->status , 'waktu_kembali' => Carbon::now()])
     ;
     return Redirect::back();
     }

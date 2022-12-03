@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class validation extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->hasMany(cart::class, 'userid', 'userid');
+    }
 }

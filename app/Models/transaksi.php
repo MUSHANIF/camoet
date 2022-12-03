@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class transaksi extends Model
 {
     use HasFactory;
+    public function tra()
+    {
+        return $this->belongsTo(cart::class, 'userid', 'userid');
+    }
 }
