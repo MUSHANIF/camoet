@@ -18,17 +18,18 @@ use App\Http\Controllers\TransaksiController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['revalidate','verified']], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
+    Route::get('/maintenance', function () {
+        return view('maintenance');
+    });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
-Route::get('/maintenance', function () {
-    return view('maintenance');
+    Route::get('/listmotor', [dashboardController::class, 'list'])->name('listmotor');
+    Route::resource('profile', profileController::class);
+    Route::get('/change/{id}', [profileController::class, 'change']);
+    Route::post('/update/{id}', [profileController::class, 'updatepw'])->name('updatepw');
 });
-
-Route::get('/listmotor', [dashboardController::class, 'list'])->name('listmotor');
-Route::resource('profile', profileController::class);
-Route::get('/change/{id}', [profileController::class, 'change']);
-Route::post('/update/{id}', [profileController::class, 'updatepw'])->name('updatepw');
-Route::group(['middleware' => ['revalidate','auth']], function () {
+Route::group(['middleware' => ['revalidate','auth', 'verified']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/dashboardAdmin', [dashboardController::class, 'index'])->name('dashboardAdmin');
         Route::resource('jnsmotor', jnsmotorController::class);
@@ -42,6 +43,8 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
     Route::group(['middleware' => ['superadmin']], function () {
         Route::get('/dashboardsuperadmin', [dashboardController::class, 'index'])->name('dashboardsuperadmin');
         Route::resource('dataadmin', adminController::class);
+        Route::get('/datauser', [App\Http\Controllers\userController::class, 'data'])->name('datauser');
+        
     });
     Route::group(['middleware' => ['user']], function () {
         Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
@@ -56,3 +59,4 @@ Route::group(['middleware' => ['revalidate','auth']], function () {
     });
 });
 require __DIR__.'/auth.php';
+

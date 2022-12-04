@@ -39,14 +39,14 @@
         <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
           <div class="col-lg-8 ftco-animate">
           	<div class="text w-100 text-center mb-md-5 pb-md-5">
-	            <h1 class="mb-4">Fast &amp; Easy Way To Rent A Motorcycle</h1>
-	            <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
+	            <h1 class="mb-4">Cara Cepat &amp; Mudah Untuk menyewa Motor!</h1>
+	            <p style="font-size: 18px;">Kami adalah Remot , yang selalu menyediakan motor - motor pilihan anda yang paling terbaik </p>
 	            <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
 	            	<div class="icon d-flex align-items-center justify-content-center">
 	            		<img src="/assets/img/icons/unicons/easy.png" width="40px" height="40px" alt="">
 	            	</div>
 	            	<div class="heading-title ml-5">
-		            	<span>Easy steps for renting a Motorcycle</span>
+		            	<span>Pasti ada , Murah ,dan Aman</span>
 	            	</div>
 	            </a>
             </div>
@@ -63,7 +63,7 @@
 	  				
 	  					<div class="col-md-12 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
-	  							<h3 class="heading-section mb-4">Better Way to Rent Your Perfect Motorcycle</h3>
+	  							<h3 class="heading-section mb-4">Bagaimana caranya menyewa motor di kami?</h3>
 	  							<div class="row d-flex mb-4">
 					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
 					            <div class="services w-100 text-center">
@@ -103,8 +103,8 @@
     	<div class="container">
     		<div class="row justify-content-center">
           <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">What we offer</span>
-            <h2 class="mb-2">Feeatured Vehicles</h2>
+          	<span class="subheading">Motor andalan kami</span>
+            <h2 class="mb-2">Motor kami yang tersedia </h2>
           </div>
         </div>
     		<div class="row">
@@ -122,7 +122,7 @@
 		    						<h2 class="mb-0"><a href="#">{{ $key->name }}</a></h2>
                     <div class="d-flex mb-3">
 			    					
-			    						<p class="price ml-auto">{{ $key->harga }} <span>/week</span></p>
+			    						<p class="price ml-auto">{{number_format($key->harga, 0, '', '.') }} <span>/week</span></p>
 		    						</div>
 		    						<div class="d-flex mb-3">
 			    						<span class="cat">{{ $key->deskripsi }}</span>
@@ -274,8 +274,8 @@
 	          	<span class="subheading">About us</span>
 	            <h2 class="mb-4">Welcome to Remot </h2>
 
-	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-	            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+	            <p>Kami selalu menyediakan motor - motor pilihan anda ,banyak jenis dan kategori motor yang mungkin anda cari, di mulai dari harga 300.000 per minggu sampai 2.000.000 perminggu </p>
+	            <p>Motor kami akan selalu ada jaminan nya,motor selalu di rawat seperti anak sendiri,di jamin kinclong setiap anda memasuki toko kami,perawatan yang setiap bulan kami lakukan ,seperti ganti oli dan selalu kami cek perawatan mesin ,dan juga kami mempunyai  mekanik handal yang setiap hari mengecek kendaraan sebelum di sewakan .</p>
 	            <p><a href="#" class="btn btn-primary py-3 px-4">Cari motor!</a></p>
 	          </div>
 					</div>
@@ -283,7 +283,7 @@
 			</div>
 		</section>
 
-		<section class="ftco-section">
+		{{-- <section class="ftco-section">
 			<div class="container">
 				<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -330,7 +330,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> --}}
 
 		<section class="ftco-section ftco-intro" style="background-image: url(images/bg_3.jpg);">
 			<div class="overlay"></div>
@@ -350,7 +350,7 @@
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
           	<span class="subheading">Testimonial</span>
-            <h2 class="mb-3">Happy Clients</h2>
+            <h2 class="mb-3">Tanggapan Customer kami</h2>
           </div>
         </div>
         <div class="row ftco-animate">
@@ -422,7 +422,7 @@
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 heading-section text-center ftco-animate">
           	<span class="subheading">Berita</span>
-            <h2>Berita Terkini</h2>
+            <h2>Sekilas Berita Terkini</h2>
           </div>
         </div>
   
@@ -459,7 +459,7 @@
           <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
             <div class="block-18">
               <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="60">0</strong>
+                <strong class="number" data-number="1">0</strong>
                 <span>Year <br>Experienced</span>
               </div>
             </div>
@@ -467,8 +467,8 @@
           <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
             <div class="block-18">
               <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="1090">0</strong>
-                <span>Total <br>Cars</span>
+                <strong class="number" data-number="{{ $motor }}">0</strong>
+                <span>Total <br>Motor</span>
               </div>
             </div>
           </div>
@@ -483,8 +483,8 @@
           <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
             <div class="block-18">
               <div class="text d-flex align-items-center">
-                <strong class="number" data-number="67">0</strong>
-                <span>Total <br>Branches</span>
+                <strong class="number" data-number="{{ $transaksi }}">0</strong>
+                <span>Total <br>Transaksi</span>
               </div>
             </div>
           </div>
@@ -497,8 +497,8 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <h2 class="ftco-heading-2"><a href="#" class="logo">RE<span>MOT</span></a></h2>
+              <p>website rental motor yang selalu menyediakan motor bagus ,terawat dengan harga murah dan terjangkau</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -532,12 +532,12 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<h2 class="ftco-heading-2">Punya pertanyaan?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Jl Perumahan Pondok cipta raya blok c</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+62 895617434</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">Remot@yahoo.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -547,7 +547,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | made with <i class="icon-heart color-danger" aria-hidden="true"></i> by Remot</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>

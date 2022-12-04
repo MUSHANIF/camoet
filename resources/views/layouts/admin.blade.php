@@ -171,7 +171,7 @@
               <ul class="menu-sub">
                 @can('superadmin')
                 <li class="menu-item">
-                  <a href="/maintenance" class="menu-link">
+                  <a href="{{ route('datauser') }}" class="menu-link">
                     <div data-i18n="Without menu">Daftar User</div>
                   </a>
                 </li>

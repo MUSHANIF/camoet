@@ -1,77 +1,194 @@
 @extends('layouts.admin')
 @section('search')
 
-<li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
-    href="javascript:void(0)"><i class="mdi mdi-magnify me-1"></i> <span class="font-16">Search</span></a>
-<form action="{{ url('akunuser') }}" method="GET" class="app-search position-absolute">
-    <input type="text" class="form-control" name="cari" placeholder="Search &amp; enter"> <a
-        class="srh-btn"><i class="mdi mdi-window-close"></i></a>
-</form>
-</li>
-</form>
+<div class="navbar-nav align-items-center">
+    <div class="nav-item d-flex align-items-center">
+      <i class="bx bx-search fs-4 lh-0"></i>
+      <form action="{{ url('dataUser') }}" method="GET">
+      <input
+        type="text"
+        class="form-control border-0 shadow-none"
+        placeholder="Search..."
+        aria-label="Search..."
+        name="cari"
+      />
+    </form>
+    </div>
+  </div>
 @endsection
 @section("button")
 <div class="col-6">
     <div class="text-end upgrade-btn">
-        <a href="{{ route('akunuser.create') }}" class="btn btn-primary text-white"
+        <a href="" class="btn btn-primary text-white"
                 >Tambah</a>
     </div>
 </div>
 @endsection
 @section('title')
-<h1 class="mb-0 fw-bold">list Akun user</h1> 
+<h1 class="mb-0 fw-bold">List Akun User</h1> 
 @endsection
 @section('isi')
-<div class="container">
-    @if ($datas->isNotEmpty())
-   
-   
-    <table class="table mt-3" cellpadding="10" cellspace="0">
-        <thead class="align-self-center text-center">
+<div class="card">
+    <h5 class="card-header">Data User</h5>
+    <div class="table-responsive text-nowrap">
+      <table class="table table-borderless text-center">
+        <thead>
+          <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Level</th>
              <th>Action</th>
-           
-            
+          
+          </tr>
         </thead>
-       
-        @foreach ($datas as $key) 
+        @foreach ($datas as $key )
         <tbody>
-            <tr class="align-self-center text-center"  style="border: 1px solid black;">
+          <tr>
+           
+            <td> <strong>{{ $key->name }}</strong></td>
+            <td >{{ $key->email }}</td>
+            <td >User</td>
+            <td>
               
-                <td data-label="Name">{{ $key->name }}</td>
-                <td data-label="Email">{{ $key->email }}</td>
-
-                <td data-label="Level">User</td>
-               
-                 <td class="text-center justify-content-center align-self-center d-flex">
+              <div class="dropdown">
+                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                  <i class="bx bx-dots-vertical-rounded"></i>
+                </button>
+                <div class="dropdown-menu">
                     
-                    <a class="btn btn-info" href="{{ route('akunuser.edit',$key->id)}}">Ubah</a>
-                    <form action="{{ url('akunuser/'.$key->id) }}" method="POST" >
+                    <a  id="detail" class="dropdown-item "   data-bs-toggle="offcanvas" href="#" data-bs-target="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+                    
+                    data-name="{{ $key->name }}"
+                    data-email="{{ $key->email  }}"
+                    data-nik="{{ $key->nik  }}"
+                    data-no_hp="{{ $key->no_hp  }}"
+                    data-alamat="{{ $key->alamat  }}"
+                 
+                 
+                    >
+                    <i class="bx bx-edit-alt me-1"></i>  Detail User
+                  </a>
+                      <form action="{{ url('dataUser/'.$key->id) }}" method="POST" >
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger ms-2">Delete</button>
+                        <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i>Delete</button>
+                        
                     </form>
-                </td>
-            
-            </tr>
-        </tbody>
-        @endforeach
-       
+                  
+                </div>
+              </div>
+            </td>
+          
 
-    </table>
-    @else
-    <div id="error">
-        <div class="container text-center">
-        <div class="pt-8">
-            <h1 class="errors-titles">404</h1>
-            <p>Data Kosong,tidak ada villa!</p>
-           
-          </div>
-        </div>
-    </div>
-          @endif
-</div>
+          </tr>
+        </tbody>
     
+    
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Detail User </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              {{-- <div class="text-center mb-4">
+                <a href="" data-bs-toggle="modal" id="motorDetails"  data-bs-target="#exampleModal1"><img src="" id="img" style="height: 100px; width: 150px" /></a>
+              </div> --}}
+              <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                   <div class="modal-content">
+                      <div class="modal-header">
+                         <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Detail Foto</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                         <img src="" id="img2" style="height: 100%; width: 100%" />
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div id="motorDetails" class="modal-body" style="margin-bottom: 12px">
+              <div>
+                <b>Nama User: </b>
+                <p><span id="name"></span></p>
+               </div>
+               <div>
+                 <b>Email user: </b>
+                 <p><span id="email"></span></p>
+                </div>
+                @if($data) 
+                <div>
+                  <b>Nik: </b>
+                  <p><span id="nik"></span></p>
+                 </div>
+                <div>
+                 <b>No hp: </b>
+                 <p><span id="no_hp"></span></p>
+                </div>
+                <div>
+                  <div>
+                    <b>alamat: </b>
+                    <p><span id="alamat"></span></p>
+                   </div>
+                   @endif
+            </div>
+          </div>
+         
+       
+       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Detail User </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          {{-- <div class="text-center mb-4">
+            <a href="" data-bs-toggle="modal" id="motorDetails"  data-bs-target="#exampleModal1"><img src="" id="img" style="height: 100px; width: 150px" /></a>
+          </div> --}}
+          <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Detail Foto</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                     <img src="" id="img2" style="height: 100%; width: 100%" />
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="motorDetails" class="modal-body" style="margin-bottom: 12px">
+            <div class="alert alert-danger" role="alert">User belum validasi!</div>
+        </div>
+      </div>
+        
+        @endforeach
+      </table>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+         $(document).on('click', '#detail', function () {
+        
+       var name = $(this).data('name');
+       var email = $(this).data('email');
+       var nik = $(this).data('nik');
+       var no_hp = $(this).data('no_hp');
+       var alamat = $(this).data('alamat');
+      
+      
+       
+       
+       $('#name').text(name);
+       $('#email').text(email);
+       $('#nik').text(nik);
+       $('#no_hp').text(no_hp);
+       $('#alamat').text(alamat);
+       
+       
+      
+       
+    });
+  });
+</script>
 @endsection

@@ -7,7 +7,7 @@
         {{-- <small class="text-muted float-end">Default label</small>    --}}
       </div>
       <div class="card-body">
-        <form action="{{ route('dataadmin.update') }}" method="POST"  enctype="multipart/form-data" >
+        <form action="{{ route('dataadmin.store') }}" method="POST"  enctype="multipart/form-data" >
             @csrf
            <input type="hidden" value="2" name="level">
           <div class="row mb-3">

@@ -12,4 +12,8 @@ class validation extends Model
     {
         return $this->hasMany(cart::class, 'userid', 'userid');
     }
+    public function validationuser()
+    {
+        return $this->belongsTo(User::class, 'userid', 'id');
+    }
 }

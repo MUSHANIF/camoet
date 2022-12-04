@@ -90,7 +90,7 @@
               <td id="td"><img src="/assets/images/motor/{{ $key->mtr->image }}" style="height: 100px; width: 150px" /></td>
               <td> <strong>{{ $key->mtr->name }}</strong></td>
               <td >{{ $key->durasi }} Minggu</td>
-              <td >{{ $key->mtr->harga }} /Minggu</td>
+              <td >{{number_format($key->mtr->harga, 0, '', '.') }}/Minggu</td>
               <td>
                 
                 <div class="dropdown">

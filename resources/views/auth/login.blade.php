@@ -15,7 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login | Camoet</title>
+    <title>Login | Remot</title>
 
     <meta name="description" content="" />
 
@@ -120,17 +120,17 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Camoet</span>
+                  <span class="app-brand-text demo text-body fw-bolder">Remot</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Camoet! 👋</h4>
+              <h4 class="mb-2">Welcome to Remot! 👋</h4>
               <p class="mb-4">Please sign-in to your account </p>
 
               <form action="{{ route('login') }}" method="POST" id="formAuthentication" class="mb-3" >
                 @csrf
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control"

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Auth;
 class TransaksiController extends Controller
 {
+    //Status = 0 adalah belum melakukan pembayaran
      //Status = 1 adalah sudah melakukan pembayaran
     //status = 2 adalah motor sudah di kembalikan
     //status = 3  adalah motor yang terlambat di kembalikan
@@ -66,11 +67,12 @@ class TransaksiController extends Controller
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
         ->where('carts.userid',Auth::id()) 
         ->get();
-        $jmlh =  cart::with(['user','mtr'])->where('userid', $id)->count();
+        $jmlh =  cart::with(['user','mtr'])->where('userid', $id)->where('status', 0)->count();
         $total =  motor::with([
             'cartmotor'])
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
         ->where('carts.userid',Auth::id()) 
+        ->where('carts.status',0) 
         ->sum('harga')   
         ;
        return view('pembayaran',compact('motor','jmlh','total','motor2'));
@@ -80,12 +82,15 @@ class TransaksiController extends Controller
             'cartmotor'])
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
         ->where('carts.userid',Auth::id()) 
+        ->where('carts.status',0)   
         ->sum('harga')   
         ;
         $data =   motor::with([
             'mtr'])
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
-        ->where('carts.userid',Auth::id());
+        ->where('carts.userid',Auth::id())
+        ->where('carts.status',0) 
+        ;
         $cart1 = cart::where('durasi', 1)->first();
         $cart2 = cart::where('durasi', 2)->first();
         $jumlah = $data->sum('harga');
@@ -118,19 +123,21 @@ class TransaksiController extends Controller
             $model->kembalian = $request->total - $jumlah;
             $model->save();
             toastr()->success('pembayaran anda berhasil!', 'Sukses');
-            return redirect()->route('keranjang', Auth::id());
+            return redirect()->route('motoruser', Auth::id());
         }else{  
-            $motor =  cart::with(['user','mtr'])->where('userid', $id)->get();
+            $motor =  cart::with(['user','mtr'])->where('userid', $id)->where('carts.status',0)  ->get();
         $motor2 =  motor::with([
             'cartmotor'])
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
         ->where('carts.userid',Auth::id()) 
+        ->where('carts.status',0)  
         ->get();
-        $jmlh =  cart::with(['user','mtr'])->where('userid', $id)->count();
+        $jmlh =  cart::with(['user','mtr'])->where('userid', $id)->where('carts.status',0)  ->count();
         $total =  motor::with([
             'cartmotor'])
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
         ->where('carts.userid',Auth::id()) 
+        ->where('carts.status',0)  
         ->sum('harga')   
         ;
         toastr()->error('uang anda kurang!', 'Gagal');
@@ -151,9 +158,7 @@ class TransaksiController extends Controller
         $datas = motor::with([
             'cartmotor','motor'])
         ->join('carts', 'carts.mtrid', '=', 'motors.id')
-        ->where('carts.userid',Auth::id())
-        ->Orwhere('carts.status',1 )
-        ->Orwhere('carts.status',2 )
+        ->where('carts.userid', $id)
         ->get();
         $data = cart::where('durasi',1)->first();
         $data2 = cart::where('durasi',2)->first();

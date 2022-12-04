@@ -30,7 +30,7 @@
             
             <div class="col-sm-10">
                 
-              {{ $total }}
+              {{number_format($total, 0, '', '.') }}
         </div>
         <form action="{{ route('bayar',Auth::id()) }}" method="POST"  enctype="multipart/form-data" >
             @csrf

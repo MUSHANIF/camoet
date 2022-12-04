@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 class adminController extends Controller
 {
     public function index(Request $request)
     {
         $cari = $request->cari;
-        $datas =  User::where('name','like',"%".$cari."%")->orWhere('level' , 2)->get();
+        $datas =  User::where('name','like',"%".$cari."%")->Where('level' , 2)->get();
         return view('superadmin.admin.index', compact('datas'));
     }
 
@@ -48,6 +49,7 @@ class adminController extends Controller
         $model->email = $request->email;
         $model->password = $encrypted_password;
         $model->level =  $request->level;
+        $model->email_verified_at =  Carbon::now();       
         
 
         $validasi = Validator::make($data, [
@@ -139,10 +141,10 @@ class adminController extends Controller
      */
     public function destroy($id)
     {
-        $hapus = admin::find($id);
+        $hapus = User::find($id);
         $hapus->delete();
         toastr()->info('Berhasil di hapus!', 'Sukses');
-        return redirect('admin');
+        return redirect('dataadmin');
     }
     public function laporan(Request $request){
         $tgl = $request->tgl;
