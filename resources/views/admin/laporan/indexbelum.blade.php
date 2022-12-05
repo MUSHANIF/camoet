@@ -24,7 +24,7 @@
        
             >Laporan sudah di kembalikan</a>
 </div> --}}
-@endsection
+{{-- @endsection --}}
 @section('isi')
 <div class="card">
     <h5 class="card-header h">laporan yang Belum di kembalikan</h5>

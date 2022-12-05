@@ -55,11 +55,58 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script>
+
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
   
+      var pusher = new Pusher('e3cb2be6304e64f613bf', {
+        cluster: 'ap1'
+      });
+  
+      var channel = pusher.subscribe('notif');
+      channel.bind('popup', function(data) {
+        Toastify({
+        text: JSON.stringify(data.name) + "Telah bergabung beberapa detik yang lalu!",
+        duration: 6000,
+        
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+        
+      });
+    </script>
+    
   </head>
 
   <body>
     @include('sweetalert::alert')
+    <div
+    class="bs-toast toast toast-placement-ex m-2"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    data-delay="2000"
+  >
+    <div class="toast-header">
+      <i class="bx bx-bell me-2"></i>
+      <div class="me-auto fw-semibold">Bootstrap</div>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">Fruitcake chocolate bar tootsie roll gummies gummies jelly beans cake.</div>
+  </div>
 
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">

@@ -31,6 +31,7 @@ Route::group(['middleware' => ['revalidate','verified']], function () {
 });
 Route::group(['middleware' => ['revalidate','auth', 'verified']], function () {
     Route::group(['middleware' => ['admin']], function () {
+        
         Route::get('/dashboardAdmin', [dashboardController::class, 'index'])->name('dashboardAdmin');
         Route::resource('jnsmotor', jnsmotorController::class);
         Route::resource('motor', motorController::class);
