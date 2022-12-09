@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateValidationsTable extends Migration
+class CreateTanggapansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateValidationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('validations', function (Blueprint $table) {
+        Schema::create('tanggapans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userid');
-            $table->string('nik')->nullable();
-            $table->string('no_hp')->nullable();
-            $table->string('alamat')->nullable();                           
+            $table->string('tanggapan')->nullable();                      
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ class CreateValidationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('validations');
+        Schema::dropIfExists('tanggapans');
     }
 }

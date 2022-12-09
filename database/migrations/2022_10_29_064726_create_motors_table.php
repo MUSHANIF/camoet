@@ -19,6 +19,8 @@ class CreateMotorsTable extends Migration
             $table->string('name');
             $table->string('harga');
             $table->string('stok');
+            $table->string('status')->nullable();
+            $table->string('warna')->nullable();
             $table->string('plat_nomor');
             $table->string('image');
             $table->string('deskripsi');

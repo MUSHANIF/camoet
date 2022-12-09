@@ -26,6 +26,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
     <script src="https://cdn.statically.io/gh/devanka761/notipin/v1.24.49/all.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
@@ -304,7 +305,7 @@
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                       @if (Auth::user()->image  == NULL)
-                      <img src="/assets/img/avatars/1.png"  class="w-px-40 h-px-40 rounded-circle" />
+                      <img src="/assets/img/avatars/prof.svg"  class="w-px-40 h-px-40 rounded-circle" />
                       @else
                       <img src="/assets/img/avatars/{{  Auth::user()->image  }}" alt class="w-px-40 h-px-40 rounded-circle" />
                       @endif
@@ -317,7 +318,7 @@
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
                               @if (Auth::user()->image  == NULL)
-                              <img src="/assets/img/avatars/1.png"  class="w-px-40 h-px-40 rounded-circle" />
+                              <img src="/assets/img/avatars/prof.svg"  class="w-px-40 h-px-40 rounded-circle" />
                               @else
                               <img src="/assets/img/avatars/{{  Auth::user()->image  }}" alt class="w-px-40 h-px-40 rounded-circle" />
                               @endif
@@ -343,6 +344,7 @@
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
+                    
                     <li>
                       <a class="dropdown-item" href="{{  route('profile.show', Auth::user()->id)}} ">
                         <i class="bx bx-user me-2"></i>
@@ -353,14 +355,26 @@
                  
                     <li>
                       <a class="dropdown-item" href="{{  url('change/'.Auth::user()->id)}} ">
-                        <i class="bx bx-user me-2"></i>
+                        <iconify-icon icon="mdi:password" class="me-2"></iconify-icon>
                         <span class="align-middle">Change Password</span>
                         
                       </a>
                     </li>
+                    @can('user')
+                    <li>
+                      <a id="rating" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                      data-userid="{{ Auth::id() }}"
+                >
+                        <i class="bx bx-star me-2"></i>
+                        <span class="align-middle">Rating</span>
+                        
+                      </a>
+                    </li>
+                    @endcan
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
+
                     <li>
                           <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
@@ -380,7 +394,48 @@
               </ul>
             </div>
           </nav>
-
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Kirim tanggapan anda mengenai website kami!</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+          
+             <form action="{{ route('rating',Auth::id()) }}" method="POST" >
+              @csrf
+              <input type="hidden" id="userid" name="userid" value="">
+              
+              
+              <div class="row">
+                <div class="col-md-12 mt-2">
+                  <label for="exampleFormControlInput1" class="form-label">Tanggapan anda</label>
+                  
+                  <textarea
+                  id="tanggapan"
+                  name="tanggapan"
+                  class="form-control"
+                  placeholder="Website ini sangat bagus sekali,saya sangat suka!"
+                ></textarea>
+                </div>
+              </div>
+              
+              
+            
+          </div>
+     
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </form>
+          
+        
+            </div>
+          </div>
+        </div>
+      </div>
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -545,6 +600,20 @@
              reader.readAsDataURL(this.files[0]);
           });
        });
+       $(document).ready(function(){
+         $(document).on('click', '#rating', function () {
+          var userid = $(this).data('userid');
+       
+       
+       
+ 
+       $('#userid').attr('value',userid);
+    
+     
+      
+       
+    });
+  });
     </script>
   
   </body>

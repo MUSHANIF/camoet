@@ -18,8 +18,9 @@ use App\Http\Controllers\TransaksiController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::group(['middleware' => ['revalidate','verified']], function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/maintenance', function () {
         return view('maintenance');
     });
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['revalidate','auth', 'verified']], function () {
         Route::post('/kembalikan/{id}', [App\Http\Controllers\TransaksiController::class, 'balikin'])->name('kembalikan');
         Route::post('/bayar/{id}', [App\Http\Controllers\TransaksiController::class, 'bayar'])->name('bayar');
         Route::post('/validation', [App\Http\Controllers\validationController::class, 'index'])->name('validation');
+        Route::post('/rating/{id}', [App\Http\Controllers\profileController::class, 'rating'])->name('rating');
     });
 });
 require __DIR__.'/auth.php';

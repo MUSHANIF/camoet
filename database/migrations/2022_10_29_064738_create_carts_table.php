@@ -18,8 +18,10 @@ class CreateCartsTable extends Migration
             $table->unsignedBigInteger('userid');
             $table->unsignedBigInteger('jnsid');
             $table->unsignedBigInteger('mtrid');
-            $table->string('durasi');   
-            $table->integer('jumlah');
+            $table->string('durasi');        
+            $table->date('waktu')->nullable();
+            $table->date('waktu_kembali')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('jnsid')->references('id')->on('jnsmotors')->onDelete('cascade');

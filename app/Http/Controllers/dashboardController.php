@@ -25,7 +25,7 @@ class dashboardController extends Controller
     }
     public function list(Request $request) {
         $cari = $request->cari;
-        $datas =  motor::with(['motor'])->where('name','like',"%".$cari."%")->get();
+        $datas =  motor::with(['motor'])->where('name','like',"%".$cari."%")->where('status','Ada di gudang')->get();
         return view('motor',compact('datas'));
     }
 

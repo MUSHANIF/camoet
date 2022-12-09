@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\tanggapan;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Redirect;
 use Illuminate\Support\Facades\Crypt;
 
 class profileController extends Controller
@@ -145,5 +147,17 @@ class profileController extends Controller
             toastr()->error('gagal di ubah! ,tolong cek lagi', 'Gagal');
             return redirect()->back();
         }
+        
      }
+     public function rating(Request $request , $id){
+        $model = new tanggapan;
+        $model->userid = $request->userid;
+        $model->tanggapan = $request->tanggapan;
+        $model->save();
+
+
+        toastr()->success('Berhasil di buat!', 'Sukses');
+        return Redirect::back();
+        
+    }
 }

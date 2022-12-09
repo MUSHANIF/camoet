@@ -356,61 +356,35 @@
         <div class="row ftco-animate">
           <div class="col-md-12">
             <div class="carousel-testimony owl-carousel ftco-owl">
+              @foreach ($tanggap as $tang )
+                
+              
               <div class="item">
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-2" >
+                    @if ($tang->image  == NULL)
+                    <img
+                    src="/assets/img/avatars/prof.svg"
+                    alt="user-avatar"
+                    class="d-block rounded-circle"
+                    height="100"
+                    width="100"
+                    id="preview-image-before-upload"
+                  />
+                  @else
+                    <img src="/assets/img/avatars/{{ $tang->image }}" alt=""  class="d-block rounded-circle"
+                    height="100"
+                    width="100">
+                  @endif
                   </div>
                   <div class="text pt-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Marketing Manager</span>
+                    <p class="mb-4">{{ $tang->tanggapan }}</p>
+                    <p class="name">{{ $tang->name }}</p>
+                    <span class="position">User</span>
                   </div>
                 </div>
               </div>
-              <div class="item">
-                <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_2.jpg)">
-                  </div>
-                  <div class="text pt-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_3.jpg)">
-                  </div>
-                  <div class="text pt-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
-                  </div>
-                  <div class="text pt-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
-                  </div>
-                  <div class="text pt-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">System Analyst</span>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@
       <div class="d-flex align-items-start align-items-sm-center gap-4">
         @if (Auth::user()->image  == NULL)
         <img
-        src="/assets/img/avatars/1.png"
+        src="/assets/img/avatars/prof.svg"
         alt="user-avatar"
         class="d-block rounded"
         height="100"
