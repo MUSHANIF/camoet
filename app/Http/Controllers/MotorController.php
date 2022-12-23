@@ -18,11 +18,67 @@ class MotorController extends Controller
     //Status = 1 adalah sudah melakukan pembayaran
     //status = 2 adalah motor sudah di kembalikan
     //status = 3  adalah motor yang terlambat di kembalikan
-
+    public function cari(Request $request)
+    {
+        
+        $cari = $request->search;
+        $datas =  motor::with(['motor'])->where('name','like',"%".$cari)->get();
+        
+        if($request->ajax()){
+            $data = ' ';             
+            if($datas){
+                foreach($datas as $key){
+                    $data .='
+                    <tr>
+                    <td id="td"><img src="/assets/images/motor/'.$key->image.'" style="height: 100px; width: 150px" /></td>
+                    
+                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$key->name.'</strong></td>
+                    <td>'.$key->motor->name.'</td>
+                    <td>'.$key->harga.'</td>
+                    <td>'.$key->plat_nomor.'</td>
+                    <td>'.$key->status.'</td>
+                   
+                    <td class="d-none">'.$key->deskripsi.'</td>
+                    
+                   
+                  </tr>
+                    ';
+                }
+                return response()->json($data);
+            }
+}
+// $datas =  motor::with(['motor'])->where('status','Ada di gudang')->get();
+        return view('admin.motor.index', compact('datas'));
+    }
     public function index(Request $request)
     {
-        $cari = $request->cari;
+        
+        $cari = $request->search;
         $datas =  motor::with(['motor'])->where('name','like',"%".$cari."%")->get();
+        if($request->ajax()){
+            $data = ' ';             
+            if($datas != ''){
+                foreach($datas as $key){
+                    $data .='
+                    <tr>
+                    <td id="td"><img src="/assets/images/motor/'.$key->image.'" style="height: 100px; width: 150px" /></td>
+                    <td>'.$key->motor->name.'</td>
+                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$key->name.'</strong></td>
+                    <td>'.$key->harga.'</td>
+                   
+                    <td>'.$key->status.'</td>
+                    <td>'.$key->plat_nomor.'</td>
+                    <td class="d-none">'.$key->deskripsi.'</td>
+                    
+                   
+                  </tr>
+                    ';
+                }
+                return response($data);
+            }else{
+                $datas =  motor::with(['motor'])->where('status','Ada di gudang')->get();
+            }
+}
         return view('admin.motor.index', compact('datas'));
     }
 

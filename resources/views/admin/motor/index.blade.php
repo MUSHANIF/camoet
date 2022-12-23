@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@section('coba')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+@endsection
 @section('search')
 
 <div class="navbar-nav align-items-center">
@@ -7,10 +12,11 @@
       <form action="{{ url('motor') }}" method="GET">
       <input
         type="text"
-        class="form-control border-0 shadow-none"
+        class="form-control border-0 shadow-none col-md-12"
         placeholder="Search..."
-        aria-label="Search..."
-        name="cari"
+      
+        name="search"
+        id="search"
       />
     </form>
     </div>
@@ -40,10 +46,13 @@
             <th>Action</th>
           </tr>
         </thead>
-        @foreach ($datas as $key )
+
+      
             
         
-        <tbody>
+        <tbody id="disini">
+          <div class="belom">  
+            @foreach ($datas as $key )        
           <tr>
             <td id="td"><img src="/assets/images/motor/{{ $key->image }}" style="height: 100px; width: 150px" /></td>
             <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $key->name }}</strong></td>
@@ -90,8 +99,9 @@
               </div>
             </td>
           </tr>
-         
+        </div>
         </tbody>
+     
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">Detail motor {{  $key->name }}</h5>
@@ -150,6 +160,16 @@
       </table>
     </div>
   </div>
+     
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+  
+ 
+
+
+
     <script>
         $(document).ready(function(){
              $(document).on('click', '#detail', function () {
@@ -174,5 +194,46 @@
            
         });
       });
+    </script>
+     
+  
+    <script type="text/javascript">
+        var route = "{{ url('mtr') }}";
+        $('#search').typeahead({
+            source: function (query, process) {
+                return $.get(route, {
+                    query: query
+                }, function (data) {
+                    return process(data);
+                });
+            }
+        });
+    </script>
+    
+    <script>
+      $(document).ready(function () {
+        $('#search').on('keyup', function(){
+            var value = $(this).val();
+        
+            
+             
+              $.ajax({
+                type: "GET",
+                url: "/motor",
+                data: {'search':value},
+                dataType: "json",
+                beforeSend: function() {
+                    $('.belom');.show();
+                } 
+                success: function (data) {
+                  $('#disini').text(data);
+                  
+                }
+                
+            });
+            
+           
+        });
+    });
     </script>
 @endsection

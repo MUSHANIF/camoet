@@ -15,9 +15,15 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
 
     <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    
+   
+  
+  
 
     <link rel="stylesheet" href="css/ionicons.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
@@ -102,10 +108,17 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
 
           <div class="col-md-12">
           <form action="{{ url('listmotor') }}" method="GET">
-
+              @csrf
             <div class="search">
               <i class="fa fa-search"></i>
-              <input type="text" name="cari" value="{{ request('cari') }}" class="form-control" placeholder="Cari kendaraan yang anda inginkan , sekarang!">
+              <input type="search" name="search" list="datalistOptions" id="exampleDataList" value="{{ request('search') }}" id="search" class="form-control" placeholder="Cari kendaraan yang anda inginkan , sekarang!">
+              <datalist id="datalistOptions">
+                @foreach ($datas2 as $o )
+                  <option value="{{ $o->name }}">
+                @endforeach
+                
+               
+              </datalist>
               <button class="btn btn-primary">Search</button>
             </div>
             
@@ -126,60 +139,58 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
 
 		<section class="ftco-section bg-light">
     	<div class="container">
-    		<div class="row">
-                @foreach ($datas as $key )
-    			<div class="col-md-4">
-                  
+        <div class="row mycard m-2 p-2" id="mycard" >
+                              
+          @foreach ($datas as $key )
+          <div class="col-md-4" >
+                        
+                                
+                            
+            <div class="car-wrap rounded ftco-animate">
+                <div class="img rounded d-flex align-items-end">
+                    <img src="/assets/images/motor/{{ $key->image }}" style="height: 100%; width: 100%"   alt="">
+                </div>
+                <div class="text">
+                    <h2 class="mb-0"><a href="#">{{ $key->name }}</a></h2>
+                    <div class="d-flex mb-3">
+                            
+                        <p class="price ml-auto">{{ $key->harga }}<span>/day</span></p>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <span class="cat">{{ $key->deskripsi }}</span>
+                    
+                    </div>
+                    <p class="d-flex mb-0 d-block">
+                    <a id="pesan" class="btn btn-primary py-2 ml-1  " data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-userid="{{ Auth::id() }}"
+                    data-jnsid="{{ $key->jnsid }}"
+                    data-mtrid="{{ $key->id }}"
+                    >
+                        Pesan 
+                    </a>
+                
+                    <a id="detail" class="btn btn-secondary py-2 ml-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                            data-image="/assets/images/motor/{{ $key->image }}"
+                            data-name="'{{ $key->name }}"
+                            data-jenis="{{ $key->motor->name }}"
+                            data-harga="{{ $key->harga }}"
+                            data-plat="{{ $key->plat_nomor }}"
+                            data-warna="{{ $key->warna }}"
+                            data-status="{{ $key->status }}"
+                            data-des="{{ $key->deskripsi }}"
+                            >Details</a>
                         
                     
-    				<div class="car-wrap rounded ftco-animate">
-    					<div class="img rounded d-flex align-items-end">
-                            <img src="/assets/images/motor/{{ $key->image }}" style="height: 100%; width: 100%"   alt="">
-    					</div>
-    					<div class="text">
-                            <h2 class="mb-0"><a href="#">{{ $key->name }}</a></h2>
-                            <div class="d-flex mb-3">
-			    					
-                                <p class="price ml-auto">{{ $key->harga }} <span>/day</span></p>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <span class="cat">{{ $key->deskripsi }}</span>
-                            
-                            </div>
-                            <p class="d-flex mb-0 d-block">
-                              <a id="pesan" class="btn btn-primary py-2 ml-1  " data-bs-toggle="modal" data-bs-target="#exampleModal"
-                              data-userid="{{ Auth::id() }}"
-                              data-jnsid="{{ $key->motor->id }}"
-                              data-mtrid="{{ $key->id }}"
-                              >
-                                Pesan 
-                             </a>
-                        
-                              <a id="detail" class="btn btn-secondary py-2 ml-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                                    data-image="/assets/images/motor/{{ $key->image }}"
-                                      data-name="{{ $key->name }}"
-                                      data-jenis="{{ $key->motor->name  }}"
-                                      data-harga="{{ $key->harga  }}"
-                                      data-plat="{{ $key->plat_nomor  }}"
-                                      data-warna="{{ $key->warna  }}"
-                                      data-status="{{ $key->status  }}"
-                                      data-des="{{ $key->deskripsi  }}"
-                                    >Details</a>
-                                  
-                              
-                            
-                            </p>
-             
-                
-    					</div>
-    				</div>
-                 
-    			</div>
-                @endforeach
-
-    	
-    		</div>
-
+                    
+                    </p>
+    
+        
+                </div>
+            </div>
+        
+        </div>
+          @endforeach
+      </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -348,7 +359,14 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
       </div>
     </footer>
     
-  
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    {{-- <script type="text/javascript">
+      $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+  </script> --}}
     <script>
       $(document).ready(function(){
            $(document).on('click', '#detail', function () {
@@ -389,7 +407,47 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
        
     });
   });
+  // $(document).ready(function () {
+  //       $('#search').on('keyup', function(){
+  //           var value = $(this).val();
+  //           $.ajax({
+  //               type: "get",
+  //               url: "/listmotor",
+  //               data: {'search':value},
+                
+  //               success: function (data) {
+  //                   $('#mycard').html(data);
+                    
+  //               }
+  //           });
+  //       });
+  //   });
   </script>
+  
+   
+  
+  <script>
+    var tags = [];
+    $.ajax({
+                method: "GET",
+                url: "/carimotor",
+                data: 
+                
+                success: function (response) {
+                  console.log(response)
+                   cari2(response)
+                    
+                }
+            });
+
+    function cari2(tags)
+    {
+      $( "#search" ).autocomplete({
+        
+        source: tags
+      });
+    }
+    </script>
   <!-- loader -->
   {{-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -405,6 +463,7 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
+  
   <script src="js/bootstrap-datepicker.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>

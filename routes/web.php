@@ -5,6 +5,8 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\jnsmotorController;
 use App\Http\Controllers\motorController;
 use App\Http\Controllers\profileController;
+use App\Models\motor;
+use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\TransaksiController;
@@ -25,7 +27,8 @@ Route::group(['middleware' => ['revalidate','verified']], function () {
         return view('maintenance');
     });
 
-    Route::get('/listmotor', [dashboardController::class, 'list'])->name('listmotor');
+    Route::get('/listmotor', [dashboardController::class, 'search'])->name('listmotor');
+    Route::get('/carimotor', [dashboardController::class, 'cari']);
     Route::resource('profile', profileController::class);
     Route::get('/change/{id}', [profileController::class, 'change']);
     Route::post('/update/{id}', [profileController::class, 'updatepw'])->name('updatepw');
@@ -36,6 +39,12 @@ Route::group(['middleware' => ['revalidate','auth', 'verified']], function () {
         Route::get('/dashboardAdmin', [dashboardController::class, 'index'])->name('dashboardAdmin');
         Route::resource('jnsmotor', jnsmotorController::class);
         Route::resource('motor', motorController::class);
+        
+        Route::get('mtr', function (Request $request) {
+            $query = $request->get('query');
+            $filterResult = motor::with(['motor'])->where('name','like',"%".$query."%")->get();
+            return response()->json($filterResult);
+    });
         Route::get('/jumlahpemesanan', [App\Http\Controllers\motorController::class, 'jumlah'])->name('jumlahpemesanan');
         Route::get('/laporan', [App\Http\Controllers\adminController::class, 'laporan'])->name('laporan');
         Route::get('/laporanpdf', [App\Http\Controllers\adminController::class, 'pdf'])->name('laporanpdf');

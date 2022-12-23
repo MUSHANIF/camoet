@@ -37,7 +37,7 @@
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
-          <div class="col-lg-8 ftco-animate">
+          <div class="col-lg-8 animated bounceIn">
           	<div class="text w-100 text-center mb-md-5 pb-md-5">
 	            <h1 class="mb-4">Cara Cepat &amp; Mudah Untuk menyewa Motor!</h1>
 	            <p style="font-size: 18px;">Kami adalah Remot , yang selalu menyediakan motor - motor pilihan anda yang paling terbaik </p>
@@ -65,7 +65,7 @@
 	  						<div class="services-wrap rounded-right w-100">
 	  							<h3 class="heading-section mb-4">Bagaimana caranya menyewa motor di kami?</h3>
 	  							<div class="row d-flex mb-4">
-					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+					          <div class="col-md-4 d-flex align-self-stretch animated fadeInDownBig">
 					            <div class="services w-100 text-center">
 				              	<div class="icon d-flex align-items-center justify-content-center"><img src="/assets/img/icons/unicons/cek.gif" width="50px" height="50px" alt=""></div>
 				              	<div class="text w-100">
